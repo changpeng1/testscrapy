@@ -66,7 +66,8 @@ doc='''
 
 class mytestspider(scrapy.Spider):
     name='mytest'
-    start_urls=['http://list.jd.com/list.html?cat=9987%2C653%2C655&go=0']
+    start_urls=['http://list.jd.com/list.html?cat=9987%2C653%2C655&go=0',
+            'http://list.jd.com/list.html?cat=670%2C671%2C672&go=0']
     def parse(self,response):
         item=MytestItem()
         for sel in response.xpath('//li[@class="gl-item"]/div[@class="gl-i-wrap j-sku-item"]'):
@@ -74,7 +75,9 @@ class mytestspider(scrapy.Spider):
             item['title']=sel.xpath('div[@class="p-name"]/a/em/text()').extract()
             item['price']=sel.xpath('div[@class="p-price"]/strong/i/text()').extract()
             item['comment']=sel.xpath('div[@class="p-commit"]/strong/a/text()').extract()
-            yield item
+            for i in item['title']:
+                print i,item['link']
+    #        yield item
 
 
 
