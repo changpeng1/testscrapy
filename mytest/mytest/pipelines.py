@@ -8,4 +8,5 @@
 from mytest.items import MytestItem
 class MytestPipeline(object):
     def process_item(self, item, spider):
+        print "Process an item....."
         return item
